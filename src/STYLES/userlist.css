@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     list-style-type: none;
+    margin-bottom: 10px;
 }
 .userlist ul a{
     text-decoration: none;
