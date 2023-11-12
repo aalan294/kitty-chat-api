@@ -25,8 +25,12 @@ function App() {
   const [loader,setLoader] = useState(true)
   const [load,setLoad] = useState(true)
   const [user,setUser] = useState([])
+  const [loading,setLoading] = useState(false)
 useEffect(()=>{
   const fetchData = async()=>{
+    if(!username){
+      setUsername(JSON.parse(localStorage.getItem('kitty-user')))
+    }
     const response = await api.get(`/main/${username}`)
     setFriends(response.data)
     setLoader(false)
@@ -34,6 +38,9 @@ useEffect(()=>{
   fetchData()
 },[username])
 useEffect(()=>{
+  if(!username){
+    setUsername(JSON.parse(localStorage.getItem('kitty-user')))
+  }
   const fetchChats = async()=>{
     const chats = await api.get(`/chats/${username}`)
     setChats(chats.data)
@@ -43,12 +50,14 @@ useEffect(()=>{
 },[load])
 
 useEffect(()=>{
+  setLoader(true)
   const fetchUsers = async()=>{
     const Cusers = await api.get('/users')
     setUser(Cusers.data)
+    setLoader(false)
   }
     fetchUsers()
-},[])
+},[loading])
 
 const handleSubmit = async(e)=>{
   try{
@@ -67,7 +76,8 @@ const handleSubmit = async(e)=>{
 }
 const handleSearch=(e)=>{
       e.preventDefault()
-      const filtered = user.filter(tes => tes.username.includes(search))
+      setLoading(true)
+      const filtered = user.filter(user => user.username.toLowerCase().includes(search.toLowerCase()));
       setSearchList(filtered)
 }
 const handleSignIn=async(e)=>{
@@ -81,6 +91,7 @@ const handleSignIn=async(e)=>{
           navigate('/home')
           setUsernameSI('')
           setPasswordI('')
+          localStorage.setItem('kitty-user',JSON.stringify(username))
     }
     else{
       alert("enter correct user id and password")
@@ -100,6 +111,7 @@ const handleSignUp=async(e)=>{
       navigate('/home')
       setUsernameSU('')
       setPasswordU('')
+      localStorage.setItem('kitty-user',JSON.stringify(username))
     }
   } catch (error) {
     console.log(error.message)
@@ -113,7 +125,7 @@ const handleSignUp=async(e)=>{
     <Route path='/' element={<AuthPage usernameSI={usernameSI} usernameSU={usernameSU} setUsernameSI={setUsernameSI} setUsernameSU={setUsernameSU} passwordI={passwordI} passwordU={passwordU} setPasswordI={setPasswordI} setPasswordU={setPasswordU} handleSignIn={handleSignIn} handleSignUp={handleSignUp}/>}/>
     <Route path='/home' element={<Home friends={friends} loader ={loader} />} />
     <Route path = '/:id' element = {<ChatPage chats = {chats} handleSubmit={handleSubmit} message={message} setMessage={setMessage} setReciever={setReciever} />} />
-    <Route path="/search" element={<Search search={search} setSearch={setSearch} searchList = {searchList} setSearchList={setSearchList} handleSearch={handleSearch} />} />
+    <Route path="/search" element={<Search loader={loader} search={search} setSearch={setSearch} searchList = {searchList} setSearchList={setSearchList} handleSearch={handleSearch} />} />
    </Routes>
    </div>
   )
