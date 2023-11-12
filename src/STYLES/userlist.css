@@ -12,6 +12,7 @@
 .userlist ul{
     margin-top: 3rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     list-style-type: none;
