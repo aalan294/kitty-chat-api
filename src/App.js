@@ -28,10 +28,15 @@ function App() {
   const [loading,setLoading] = useState(false)
 useEffect(()=>{
   const fetchData = async()=>{
+    try {
       setUsername(JSON.parse(localStorage.getItem('kitty-user')))
     const response = await api.get(`/main/${username}`)
     setFriends(response.data)
     setLoader(false)
+    } catch (error) {
+      navigate('/')
+    }
+    
   }
   fetchData()
 },[username])
@@ -40,9 +45,13 @@ useEffect(()=>{
     setUsername(JSON.parse(localStorage.getItem('kitty-user')))
   }
   const fetchChats = async()=>{
-    const chats = await api.get(`/chats/${username}`)
+    try {
+      const chats = await api.get(`/chats/${username}`)
     setChats(chats.data)
     setLoad(false)
+    } catch (error) {
+      navigate('/')
+    }
   }
     fetchChats()
 },[load])
@@ -50,9 +59,13 @@ useEffect(()=>{
 useEffect(()=>{
   setLoader(true)
   const fetchUsers = async()=>{
-    const Cusers = await api.get('/users')
+    try {
+      const Cusers = await api.get('/users')
     setUser(Cusers.data)
     setLoader(false)
+    } catch (error) {
+      navigate('/')
+    }
   }
     fetchUsers()
 },[loading])
