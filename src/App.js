@@ -28,9 +28,7 @@ function App() {
   const [loading,setLoading] = useState(false)
 useEffect(()=>{
   const fetchData = async()=>{
-    if(!username){
       setUsername(JSON.parse(localStorage.getItem('kitty-user')))
-    }
     const response = await api.get(`/main/${username}`)
     setFriends(response.data)
     setLoader(false)
