@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkblue;
+    color: white;
+    padding: 1rem 5px;
+}
+.nav a{
+    text-decoration: none;
+    color: inherit;
+}
+.nav div{
+    border: 1px solid white;
+    padding: 0 1.8rem;
+    border-radius: 5px;
+    background-color: aliceblue;
+    color: black;
+}
+.nav button{
+    padding: 0.2rem;
+    border-radius: 5px;
+}

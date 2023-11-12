@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.chat ul{
+    margin-top: 2.5rem;
+    list-style-type: none;
+    padding: 0.5rem  2rem;
+    height: 40vh;
+    overflow: scroll;
+}
+.chat ul li{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    background-color: #00008b;
+    color: white;
+}
+
+.chat h1{
+    text-align: center;
+    background-color: rgb(181, 177, 177);
+    width: 100vw;
+    padding: 1rem;
+}
+.chat form{
+    display: flex;
+    align-items:flex-start;
+    padding: 0.5rem  2rem;
+}
+.chat form button{
+    background-color: white;
+    border: none;
+}
