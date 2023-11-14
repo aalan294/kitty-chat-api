@@ -12,7 +12,7 @@ import AuthPage from './COMPONENTS/AuthPage';
 function App() {
   const navigate = useNavigate()
   const [users,setUsers] = useState([])
-  const [username,setUsername] = useState('aalan')
+  const [username,setUsername] = useState('')
   const [usernameSI,setUsernameSI] = useState('')
   const [usernameSU,setUsernameSU] = useState('')
   const [passwordI,setPasswordI] = useState('')
@@ -29,12 +29,9 @@ function App() {
   const [loading,setLoading] = useState(false)
 useEffect(()=>{
   const fetchData = async()=>{
-    if(!username){
-      setUsername(JSON.parse(localStorage.getItem('kitty-user')))
-    }
     try {
       console.log(Object.keys(username))
-    const response = await api.get(`/main/${username}`)
+    const response = await api.get(`/main/${JSON.parse(localStorage.getItem('kitty-user'))}`)
     setFriends(response.data)
     setLoader(false)
     } catch (error) {
@@ -43,14 +40,11 @@ useEffect(()=>{
     
   }
   fetchData()
-},[])
+},[username])
 useEffect(()=>{
-  if(!username){
-    setUsername(JSON.parse(localStorage.getItem('kitty-user')))
-  }
   const fetchChats = async()=>{
     try {
-      const chats = await api.get(`/chats/${username}`)
+      const chats = await api.get(`/chats/${JSON.parse(localStorage.getItem('kitty-user'))}`)
     setChats(chats.data)
     setLoad(false)
     } catch (error) {
@@ -58,7 +52,7 @@ useEffect(()=>{
     }
   }
     fetchChats()
-},[])
+},[username])
 
 useEffect(()=>{
   setLoader(true)
