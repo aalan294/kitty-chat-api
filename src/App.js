@@ -67,7 +67,7 @@ useEffect(()=>{
     }
   }
     fetchChats()
-},[username])
+},[username,load])
 
 useEffect(()=>{
   setLoader(true)
