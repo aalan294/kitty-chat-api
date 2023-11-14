@@ -39,7 +39,7 @@ useEffect(()=>{
     
   }
   fetchData()
-},[username])
+},[])
 useEffect(()=>{
   if(!username){
     setUsername(JSON.parse(localStorage.getItem('kitty-user')))
@@ -54,7 +54,7 @@ useEffect(()=>{
     }
   }
     fetchChats()
-},[load])
+},[])
 
 useEffect(()=>{
   setLoader(true)
@@ -68,7 +68,7 @@ useEffect(()=>{
     }
   }
     fetchUsers()
-},[loading])
+},[])
 
 const handleSubmit = async(e)=>{
   try{
