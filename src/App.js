@@ -93,7 +93,7 @@ const handleSubmit = async(e)=>{
       }
       await api.post('/chats',chat)
       setLoad(true)
-      setMessage(message)
+      setMessage('')
   }catch(err){
       console.log(err.message)
   }   
