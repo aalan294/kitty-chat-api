@@ -115,7 +115,7 @@ const handleSignIn=async(e)=>{
           navigate('/home')
           setUsernameSI('')
           setPasswordI('')
-          localStorage.setItem('kitty-user',JSON.stringify(username))
+          localStorage.setItem('kitty-user',JSON.stringify(usernameSI))
     }
     else{
       alert("enter correct user id and password")
@@ -135,7 +135,7 @@ const handleSignUp=async(e)=>{
       navigate('/home')
       setUsernameSU('')
       setPasswordU('')
-      localStorage.setItem('kitty-user',JSON.stringify(username))
+      localStorage.setItem('kitty-user',JSON.stringify(usernameSU))
     }
   } catch (error) {
     console.log(error.message)
