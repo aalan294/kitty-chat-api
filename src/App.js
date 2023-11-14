@@ -30,10 +30,17 @@ function App() {
 useEffect(()=>{
   const fetchData = async()=>{
     try {
-      console.log(Object.keys(username))
-    const response = await api.get(`/main/${username}`)
-    setFriends(response.data)
-    setLoader(false)
+    if(username){
+      const response = await api.get(`/main/${username}`)
+      setFriends(response.data)
+      setLoader(false)
+    }
+    else{
+      const response = await api.get(`/main/${JSON.parse(localStorage.getItem('kitty-user'))}`)
+      setFriends(response.data)
+      setLoader(false)
+    }
+    
     } catch (error) {
       navigate('/')
     }
@@ -44,9 +51,17 @@ useEffect(()=>{
 useEffect(()=>{
   const fetchChats = async()=>{
     try {
-      const chats = await api.get(`/chats/${username}`)
-    setChats(chats.data)
-    setLoad(false)
+      if(username){
+        const chats = await api.get(`/chats/${username}`)
+        setChats(chats.data)
+        setLoad(false)
+      }
+      else{
+        const chats = await api.get(`/chats/${JSON.parse(localStorage.getItem('kitty-user'))}`)
+        setChats(chats.data)
+        setLoad(false)
+      }
+    
     } catch (error) {
       navigate('/')
     }
@@ -100,7 +115,7 @@ const handleSignIn=async(e)=>{
           navigate('/home')
           setUsernameSI('')
           setPasswordI('')
-          // localStorage.setItem('kitty-user',JSON.stringify(username))
+          localStorage.setItem('kitty-user',JSON.stringify(username))
     }
     else{
       alert("enter correct user id and password")
