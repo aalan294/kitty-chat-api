@@ -87,7 +87,7 @@ const handleSubmit = async(e)=>{
   try{
       e.preventDefault()
       let chat = {
-        sender :username,
+        sender :username?username:JSON.parse(localStorage.getItem('kitty-user')),
         reciever :reciever,
         message :message
       }
