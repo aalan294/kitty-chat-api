@@ -1,7 +1,8 @@
 import './App.css';
 import {useEffect, useState} from 'react'
 import api from './API/api'
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './COMPONENTS/Home';
 import UserList from './COMPONENTS/UserList';
 import ChatPage from './COMPONENTS/ChatPage';
